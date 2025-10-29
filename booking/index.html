@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc;
+        }
+        .container {
+            max-width: 400px;
+        }
+        /* Custom styles for input focus */
+        .form-group input:focus, 
+        .form-group select:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+            outline: none;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 flex justify-center items-center min-h-screen">
+
+    <div class="container bg-white p-6 sm:p-8 rounded-xl shadow-2xl w-full">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-3" style="margin-left: 10%; margin-right: 10%;color: #4f46e5;";>Nakita Service Booking Form</h1>
+        <form id="bookingForm" class="space-y-4">
+            
+            <!-- Service Selection -->
+            <div class="form-group">
+                <label for="service" class="block text-sm font-medium text-gray-700 mb-1">Select Service:</label>
+                <select id="service" name="Type_of_Service" required
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-lg shadow-sm transition duration-150 ease-in-out">
+                    <option value="" disabled selected>-- Choose a Service --</option>
+                    <option value="System Cleaning">System cleaning</option>
+                    <option value="Hardware Troubleshooting">Hardware & Troubleshooting</option>
+                    <option value="Component Installation">Component Installation</option>
+                    <option value="Software Installation">Windows & software installation</option>
+                    <option value="Thermal Replacement">Thermal paste & pads replacement</option>
+                </select>
+            </div>
+
+            <!-- Date Selection -->
+            <div class="form-group">
+                <label for="booking-date" class="block text-sm font-medium text-gray-700 mb-1">Select Date:</label>
+                <input name="Date" type="date" id="booking-date" required
+                    class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 transition duration-150 ease-in-out">
+            </div>
+
+            <!-- Time Selection -->
+            <div class="form-group">
+                <label for="booking-time" class="block text-sm font-medium text-gray-700 mb-1">Select Time (After 5:30 PM on Weekdays):</label>
+                <input name="Time" type="time" id="booking-time" required
+                    class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 transition duration-150 ease-in-out">
+                <p id="time-message" class="text-red-600 text-sm mt-1 font-medium"></p>
+            </div>
+
+            <hr class="my-6 border-gray-200">
+
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Your Contact Details</h2>
+            
+            <!-- Contact Inputs -->
+            <div class="form-group">
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name:</label>
+                <input name="Name" type="text" id="name" required
+                    class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 transition duration-150 ease-in-out">
+            </div>
+            
+            <div class="form-group">
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address:</label>
+                <input name="Email" type="email" id="email" required
+                    class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 transition duration-150 ease-in-out">
+            </div>
+
+            <div class="form-group">
+                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number:</label>
+                <input name="Phone_Number" type="tel" id="phone" required
+                    class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 transition duration-150 ease-in-out">
+            </div>
+            
+            <div class="form-group">
+                <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Address:</label>
+                <input name="Location" type="text" id="address" required
+                    class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 transition duration-150 ease-in-out">
+            </div>
+            
+            <div class="form-group">
+                <label for="note" class="block text-sm font-medium text-gray-700 mb-1">Note (Optional):</label>
+                <textarea name="Note" id="note" rows="3"
+                    class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 transition duration-150 ease-in-out"></textarea>
+            </div>
+            
+            <!-- Submit Button and Message -->
+            <button type="submit" id="submit-btn"
+                class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-md text-lg font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out disabled:opacity-50">
+                Confirm Booking
+            </button>
+            
+            <div id="confirmation" class="mt-4 p-4 rounded-lg text-center hidden"></div>
+        </form>
+    </div>
+
+    <script>
+        // *** CONFIGURATION: REPLACE THIS URL ***
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwymd666XpIkg_E_P7SdoEyZh9ogMCrWqGrf5b_NiA44aOtjDF2fNSgWyDdeZClFZM/exec"; 
+        // ***************************************
+
+        const form = document.getElementById('bookingForm');
+        const dateInput = document.getElementById('booking-date');
+        const timeInput = document.getElementById('booking-time');
+        const timeMessage = document.getElementById('time-message');
+        const confirmationDiv = document.getElementById('confirmation');
+        const submitBtn = document.getElementById('submit-btn');
+
+        // Helper to convert array of form fields to a simple object
+        const formToJSON = elements => [].reduce.call(elements, (data, element) => {
+            if (element.name && element.name !== '') {
+                data[element.name] = element.value;
+            }
+            return data;
+        }, {});
+
+        // --- Validation Logic ---
+
+        function validateTime(date, time) {
+            const dateObj = new Date(date);
+            const dayOfWeek = dateObj.getDay(); // 0=Sunday, 6=Saturday
+            const [hour, minute] = time.split(':').map(Number);
+            const timeInMinutes = hour * 60 + minute;
+            const requiredTimeInMinutes = 17 * 60 + 30; // 5:30 PM (17:30)
+
+            timeMessage.textContent = ''; // Clear previous message
+
+            // Check if it's a weekday (Monday=1 to Friday=5)
+            if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+                if (timeInMinutes < requiredTimeInMinutes) {
+                    timeMessage.textContent = 'Appointments on weekdays must be after 5:30 PM.';
+                    return false;
+                }
+            } else if (dayOfWeek === 0 || dayOfWeek === 6) {
+                // Optionally allow any time on weekends, or enforce a different rule
+                timeMessage.textContent = 'Weekend appointments are available all day.';
+            }
+
+            return true;
+        }
+
+        timeInput.addEventListener('change', () => {
+            if (dateInput.value) {
+                validateTime(dateInput.value, timeInput.value);
+            }
+        });
+        dateInput.addEventListener('change', () => {
+            if (timeInput.value) {
+                validateTime(dateInput.value, timeInput.value);
+            }
+        });
+
+        // --- Submission Handler ---
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Re-run final validation
+            if (!validateTime(dateInput.value, timeInput.value)) {
+                return;
+            }
+
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Booking... Please wait';
+            confirmationDiv.classList.add('hidden');
+
+            // 1. Collect form data
+            const data = formToJSON(form.elements);
+            
+            // Add a timestamp
+            data['Booking_Timestamp'] = new Date().toLocaleString();
+
+            // 2. Convert data object to URLSearchParams for POST request
+            const formData = new URLSearchParams(data);
+
+            try {
+                // 3. Send data to Google Apps Script endpoint
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Essential for Apps Script
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: formData.toString()
+                });
+
+                // Since 'no-cors' mode is used, we can only check for fetch success, 
+                // but for a successful Apps Script execution, we assume it worked.
+                
+                confirmationDiv.textContent = '✅ Appointment successfully booked and saved to the sheet!';
+                confirmationDiv.classList.remove('hidden', 'bg-red-100', 'text-red-800');
+                confirmationDiv.classList.add('bg-green-100', 'text-green-800');
+                form.reset(); // Clear the form on success
+
+            } catch (error) {
+                console.error('Submission Error:', error);
+                confirmationDiv.textContent = '❌ Error submitting the booking. Check the console and the Apps Script URL.';
+                confirmationDiv.classList.remove('hidden', 'bg-green-100', 'text-green-800');
+                confirmationDiv.classList.add('bg-red-100', 'text-red-800');
+            } finally {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Confirm Booking';
+            }
+        });
+    </script>
+</body>
+</html>

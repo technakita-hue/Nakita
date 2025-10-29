@@ -1,0 +1,504 @@
+/* --- Global Styles --- */
+:root {
+    --color-primary: #007bff; /* Blue for primary actions/highlights */
+    --color-secondary: #28a745; /* Green for success/secondary actions */
+    --color-dark: #343a40; /* Dark background/text */
+    --color-light: #f8f9fa; /* Light background */
+    --color-white: #ffffff;
+    --font-family: 'Poppins', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--color-dark);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-padding {
+    padding: 80px 20px;
+}
+
+.bg-light {
+    background-color: var(--color-light);
+}
+
+.bg-dark {
+    background-color: var(--color-dark);
+    color: var(--color-white);
+}
+
+/* Headings */
+h2, h3 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 2em;
+    border-bottom: 3px solid var(--color-primary);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.highlight {
+    color:blue;
+}
+
+/* --- Navigation & Header --- */
+.main-header {
+    background-color: var(--color-white);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--color-dark);
+    
+}
+
+.contact:hover{
+    border-bottom: 3px solid #0056b3 ;
+    border-radius: 8px;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.main-nav ul li a {
+    text-decoration: none;
+    color: var(--color-dark);
+    padding: 10px 15px;
+    transition: color 0.3s;
+}
+
+.main-nav ul li a:hover {
+    color: var(--color-primary);
+}
+
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: var(--color-dark);
+}
+
+/* --- CTA Buttons --- */
+.cta-button {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+}
+
+.secondary:hover {
+    background-color: #1e7e34;
+    transform: translateY(-2px);
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    background-color: var(--color-light);
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 20px;
+}
+
+.hero-text {
+    max-width: 50%;
+}
+
+.hero-text h2 {
+    text-align: left;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.hero-image {
+    width: 45%;
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.cta-subtitle {
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+.cta-subtitle a {
+    color: var(--color-dark);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* --- Services Section --- */
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+
+.service-card {
+    background-color: var(--color-white);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.icon-large {
+    font-size: 3em;
+    color: var(--color-primary);
+    margin-bottom: 15px;
+}
+
+.service-card h4 {
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* --- Pricing Section --- */
+.pricing-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.pricing-card {
+    background-color: var(--color-white);
+    padding: 40px;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    text-align: center;
+    transition: border 0.3s;
+}
+
+.pricing-card.featured {
+    border: 3px solid var(--color-secondary);
+    transform: scale(1.05);
+}
+
+.pricing-card h4 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.pricing-card .price {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 30px;
+}
+
+.pricing-card ul {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.pricing-card ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+.pricing-card ul li i {
+    margin-right: 10px;
+    color: var(--color-secondary);
+}
+.pricing-card ul li.faded i {
+    color: #ccc;
+}
+
+/* --- About Section --- */
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-image {
+    flex: 1;
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+}
+
+.trust-badges {
+    margin-top: 20px;
+}
+
+.badge {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 5px 15px;
+    border-radius: 20px;
+    margin-right: 10px;
+    font-size: 0.9em;
+}
+.badge i {
+    margin-right: 5px;
+}
+
+/* --- Contact Section --- */
+.contact-section h3 {
+    color: var(--color-white);
+    border-bottom-color: var(--color-secondary);
+}
+
+.contact-section p {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+.contact-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    font-family: var(--font-family);
+    font-size: 1em;
+}
+
+.contact-form button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1em;
+}
+
+/* --- Footer --- */
+.main-footer {
+    background-color: #212529;
+    color: #adb5bd;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.9em;
+}
+.main-footer a {
+    color: #adb5bd;
+    text-decoration: none;
+}
+.main-footer a:hover {
+    color: var(--color-primary);
+}
+
+/* --- Media Queries (Responsiveness) --- */
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+    .main-nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--color-white);
+        position: absolute;
+        top: 60px; /* Adjust based on header height */
+        left: 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .main-nav.active {
+        display: flex;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        padding: 10px 0;
+    }
+
+    .main-nav ul li a {
+        padding: 15px 20px;
+        display: block;
+        border-bottom: 1px solid var(--color-light);
+    }
+    
+    .nav-toggle {
+        display: block;
+    }
+
+    /* Hero adjustments */
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero-text, .hero-image {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .hero-image {
+        order: -1; /* Puts image first on mobile */
+        margin-bottom: 30px;
+    }
+    
+    .hero-text h2 {
+        text-align: center;
+    }
+
+    /* Pricing adjustments */
+    .pricing-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pricing-card {
+        width: 100%;
+    }
+
+    /* About adjustments */
+    .about-content {
+        flex-direction: column;
+    }
+    .about-image {
+        order: -1; /* Puts image first on mobile */
+        margin-bottom: 30px;
+        height: 250px;
+    }
+}
+
+.transport-fee-section {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+
+        /* Title Styling */
+        .transport-fee-section h2 {
+            text-align: center;
+            color: #004d40; /* Dark Teal - a common corporate/clean color */
+            margin-bottom: 20px;
+            border-bottom: 2px solid #004d40;
+            padding-bottom: 10px;
+        }
+
+        /* Table Styling */
+        .fee-table {
+            width: 100%;
+            border-collapse: collapse; /* Removes double borders */
+            margin-top: 15px;
+            background-color: #fff;
+        }
+
+        /* Table Header Styling */
+        .fee-table th {
+            background-color: #00796b; /* Medium Teal for header */
+            color: white;
+            font-weight: bold;
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #004d40;
+        }
+
+        /* Table Data/Cell Styling */
+        .fee-table td {
+            padding: 10px 15px;
+            border: 1px solid #e0e0e0;
+            text-align: left;
+        }
+
+        /* Alternating row colors for better readability (Zebra striping) */
+        .fee-table tr:nth-child(even) {
+            background-color: #e8f5e9; /* Very light green */
+        }
+
+        /* Highlight the Fee/Price column */
+        .fee-table td:last-child {
+            font-weight: bold;
+            color: #d84315; /* Orange/Red for emphasis */
+            text-align: right; /* Align prices to the right */
+            width: 20%;
+        }
+
+        /* Note/Disclaimer Styling */
+        .fee-note {
+            margin-top: 25px;
+            padding: 10px;
+            background-color: #fff3e0; /* Light orange background */
+            border-left: 5px solid #ff9800; /* Orange accent bar */
+            font-size: 0.9em;
+            color: #333;
+        }
